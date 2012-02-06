@@ -1,0 +1,112 @@
+
+def succ(a) -> a = { a+ }
+
+def times(a, b) -> x = {
+	x = 0
+	a { b { x+ } }
+}
+
+def pred(x) -> p = {
+	p = 0
+	n = 0
+	x {
+	  n { p+ }
+	  n = 0
+	  n+
+	}
+}
+
+def add(a, b) -> a = {
+	b { a+ }
+}
+
+def sub(a, b) -> a = {
+	b { a = pred(a) }
+}
+
+def if(a) -> a = {
+	a {
+	  a = 0
+	  a+
+	}
+}
+
+def not(a) -> b = {
+	b = 1
+	if (a) { b = 0 }
+}
+
+def or(a, b) -> a = {
+	a = if(add(a, b))
+}
+
+def isZero(a) -> a = {
+	a = not(a)
+}
+
+def equal(a, b) -> e = {
+	e1 = sub(a, b)
+	e2 = sub(b, a)
+	e = not(or(e1, e2))
+}
+
+def gt(a, b) -> a = { a = if(sub(a, b)) }
+def gte(a, b) -> a = { a = or(gt(a, b), equal(a, b)) }
+
+def div(a, b) -> x = {
+	count+
+	count {
+		  if (gte(a,b)) {
+		    a = sub(a, b)
+			x+
+			count+
+		  }
+	}
+}
+
+def mod(a, b) -> x = {
+	q = div(a, b)
+	x = sub(a, times(q, b))
+}
+
+def numFactors(a, b) -> x = {
+	count = 1
+	count {
+		  if (not(mod(a, b))) {
+		  	 a = div(a, b)
+			 x+
+			 count+
+		  }
+	}
+}
+
+def pow(a, b) -> x = {
+	x = 1
+	b { x = times(x, a) }
+}
+
+def nil() -> a = { }
+
+def cons(x, y) -> c = {
+	c = times(pow(2, x), pow(3, y))
+}
+
+def head(x) -> x = {
+	if (not(equal(x, 0))) {
+	   x = numFactors(x, 2)
+	}
+}
+
+def tail(x) -> x = {
+	if (not(equal(x, 0))) {
+	   x = numFactors(x, 3)
+	}
+}
+
+def isNil(x) -> x = { x = equal(x, nil()) }
+
+cell1 = cons(12, nil())
+cell2 = cons(5, cell1)
+
+print(head(cell2))
+print(head(tail(cell2)))

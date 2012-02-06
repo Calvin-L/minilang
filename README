@@ -1,0 +1,87 @@
+
+========================= MINI LANG =========================
+
+---- Description
+
+This is an implementation of a tiny turing-complete language.
+The language has 3 constructs:
+
+1. set a variable to zero
+
+   x = 0
+
+2. increment a variable
+
+   x+
+
+3. repeat for a specified number of times
+
+   x { ... }
+
+   (NOTE: if you increment x inside the loop, the number of
+   iterations increases accordingly, thus allowing for
+   infinite loops. Interestingly, changing this rule makes
+   the language stop being turing complete.)
+
+---- Additions
+
+The interpreter (minii) also supports a few "syntactic sugar"
+additions:
+
+1. set a variable to an arbitrary integer
+
+   x = 402311
+
+   This is equivalent to saying "x = 0" and then incrementing
+   x 402311 times.
+
+2. defining functions
+
+   def add(a, b) -> sum = {
+       sum = 0
+	   a { sum+ }
+	   b { sum+ }
+   }
+   x = add(45, 29)
+
+   The syntax is a little odd, but just means "this is a
+   function that takes 'a' and 'b' and writes its result
+   into 'sum.'"
+
+3. builtin functions
+
+   Since this language is very limited, implementations of
+   even basic functions can be very slow. For that reason,
+   rhe interpreter has builtin implementations of some
+   other functions:
+      - sub(a,b)           subtraction    (a-b)
+      - div(a,b)           division       (a/b)
+      - add(a,b)           addition       (a+b)
+      - times(a,b)         multiplication (a*b)
+      - pow(a,b)           exponentiation (a^b)
+      - numFactors(a,b)    number of times b evenly divides a
+
+   If you don't believe such a simple language could
+   implement these on its own, check out the examples!
+
+---- Building
+
+Minii can be built with GNU Make. You will need
+
+ - GHC
+ - Alex (http://www.haskell.org/alex/)
+ - Happy (http://www.haskell.org/happy/)
+
+Just type "make" to build.
+
+---- Running
+
+Minii takes input on stdin. For instance:
+
+   $ ./minii < examples/cons.mini
+
+---- Examples
+
+There is one demo in the "examples" folder that builds
+up to cons cells, implementing successor, subtraction,
+division, and some other functions along the way.
