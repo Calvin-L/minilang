@@ -13,7 +13,7 @@ minii: lex.hs parse.hs main.hs
 clean:
 	rm -f *.hi
 	rm -f *.o
-	rm -f minic
+	rm -f minii
 	rm -f lex.hs
 	rm -f parse.hs
 

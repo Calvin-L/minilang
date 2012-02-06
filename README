@@ -39,8 +39,8 @@ additions:
 
    def add(a, b) -> sum = {
        sum = 0
-	   a { sum+ }
-	   b { sum+ }
+       a { sum+ }
+       b { sum+ }
    }
    x = add(45, 29)
 
