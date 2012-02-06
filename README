@@ -64,6 +64,15 @@ additions:
    If you don't believe such a simple language could
    implement these on its own, check out the examples!
 
+4. print functionality
+
+   x = 12
+   print(add(x, 45))
+
+   A language without I/O is pretty boring. Minilang supports
+   printing, and it shouldn't be too hard to hack in reading
+   later as well.
+
 ---- Building
 
 Minii can be built with GNU Make. You will need
